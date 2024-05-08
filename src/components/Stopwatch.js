@@ -14,7 +14,7 @@ const Stopwatch = () =>
         {
             interval = setInterval(()=>
             {
-                setSeconds((prev) => prev + 10);
+                setSeconds((prev) => prev + 1);
             },1000)
         }    
         else
