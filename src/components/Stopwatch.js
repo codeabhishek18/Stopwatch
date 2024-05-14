@@ -44,12 +44,10 @@ const Stopwatch = () =>
         setMinutes(0);
     }
 
-    console.log(seconds)
-
     return(
         <div style={{margin:'20px'}}>
             <h1>Stopwatch</h1>
-            <p>Time: {minutes}: {seconds}</p>
+            <p>Time: {minutes}:{String(seconds).padStart(2,'0')}</p>
             <button onClick={()=>startWatch()}>{start ? 'Stop' : 'Start'}</button>
             <button onClick={()=>resetWatch()}>Reset</button>
         </div>
