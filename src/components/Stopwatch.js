@@ -2,8 +2,7 @@ import { useEffect, useState } from 'react';
  
 const Stopwatch = () =>
 {
-    const [seconds, setSeconds] = useState(0);
-    const [minutes, setMinutes] = useState(0);
+    const [time, setTime] = useState(0);
     const [start, setStart] = useState(false);
 
     useEffect(() =>
@@ -14,7 +13,7 @@ const Stopwatch = () =>
         {
             interval = setInterval(()=>
             {
-                setSeconds((prev) => prev + 1);
+                setTime((prev) => prev + 1);
             },1000)
         }    
         else
@@ -26,12 +25,6 @@ const Stopwatch = () =>
 
     },[start])
 
-    if(seconds>59)
-    {
-        setSeconds(0);
-        setMinutes((prev)=>prev+1);
-    }
-
     const startWatch = () =>
     {
         setStart(!start);
@@ -40,14 +33,20 @@ const Stopwatch = () =>
     const resetWatch = () =>
     {
         setStart(false);
-        setSeconds(0);
-        setMinutes(0);
+        setTime(0);
     }
+
+    const timeFormat = (time) => 
+    {
+        const minutes = Math.floor(time / 60);
+        const seconds = time % 60;
+        return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+    };
 
     return(
         <div style={{margin:'20px'}}>
             <h1>Stopwatch</h1>
-            <p>Time: {minutes}:{String(seconds).padStart(2,'0')}</p>
+            <p>Time: {timeFormat(time)}</p>
             <button onClick={()=>startWatch()}>{start ? 'Stop' : 'Start'}</button>
             <button onClick={()=>resetWatch()}>Reset</button>
         </div>
